@@ -26,7 +26,7 @@ var bubbles = (function() {
           day     : 1440,
           days    : 1440
       },
-      gravity  = -0.01,//gravity constants
+      gravity  = -0.0,//gravity constants
       damper   = 0.2,
       friction = 0.9,
       force = d3       //gravity engine
@@ -84,7 +84,13 @@ var bubbles = (function() {
               rank     = 1;
 
               var format = d3.time.format("%Y-%m-%d");
-          d.comments = comments;
+
+          if (comments === undefined){
+            console.log(comments);
+            d.comments = '<i>No critical consensus available.<i>';
+          } else {
+            d.comments = comments;
+          }
           d.score = score;
           d.time = format.parse(time);
           d.url = d.links.alternate;
@@ -95,7 +101,7 @@ var bubbles = (function() {
         r = d3.scale.linear()
           .domain([ d3.min(posts, function(d) { return d.score; }),
                     d3.max(posts, function(d) { return d.score; }) ])
-          .range([ 10, 100 ])
+          .range([ 10, 60 ])
           .clamp(true);
 
         z = d3.scale.linear()
@@ -246,7 +252,7 @@ function legend() {
 //appends url for hover state
 function highlight( data, i, element ) {
   d3.select( element ).attr( "stroke", "black" );
-  var description = data.critics_consensus,
+  var description = data.comments,
     content = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
                description + "<br/>" + '<a href="' + data.url + '"><img src="' + data.posters.detailed + '" alt="alt text" style="border:none;" /></a>';
                console.log(data.posters.detailed);
