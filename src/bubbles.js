@@ -3,7 +3,7 @@ var bubbles = (function() {
 //NEED TO EDIT --->>
   var urls = {      //API urls
       // news  : "http://hndroidapi.appspot.com/news/format/json/page/?appid=vishna&callback=?",
-      news: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kkd937tfu53qzuesmc68j99k&limit=30&callback=?"
+      news: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kkd937tfu53qzuesmc68j99k&limit=31&callback=?"
   },
       thread = /^(item[?]id[=][0-9]+)/,               //regexp for HN thread posts
       w = $(window).width() * 0.85,  //width
@@ -77,16 +77,17 @@ var bubbles = (function() {
         posts = data.movies;
         next = posts.pop();
 
+        console.log(posts);
+        var rank = 0;
         posts.map( function(d) {
           var comments = d.critics_consensus,
               score    = parseInt( d.ratings.critics_score ),
               time     = d.release_dates.theater.split(" ").toString(),
-              rank     = 1;
-
-              var format = d3.time.format("%Y-%m-%d");
-
+              format   = d3.time.format("%Y-%m-%d");
+              rank ++;
+          d.rank = rank;
+          console.log(d.rank);
           if (comments === undefined){
-            console.log(comments);
             d.comments = '<i>No critical consensus available.<i>';
           } else {
             d.comments = comments;
@@ -101,7 +102,7 @@ var bubbles = (function() {
         r = d3.scale.linear()
           .domain([ d3.min(posts, function(d) { return d.score; }),
                     d3.max(posts, function(d) { return d.score; }) ])
-          .range([ 10, 60 ])
+          .range([ 10, 70 ])
           .clamp(true);
 
         z = d3.scale.linear()
@@ -164,7 +165,7 @@ function launch() {
     .on("mouseout", function(d, i) { downlight( d, i, this ); }).each(function(d, i){
     d.text = svg.append('text').attr('x', d.x)
                         .attr('y', d.y)
-                        .text(d.title)
+                        .text(d.rank)
     });
 
   d3.selectAll("circle")
@@ -255,7 +256,6 @@ function highlight( data, i, element ) {
   var description = data.comments,
     content = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
                description + "<br/>" + '<a href="' + data.url + '"><img src="' + data.posters.detailed + '" alt="alt text" style="border:none;" /></a>';
-               console.log(data.posters.detailed);
 
 
 

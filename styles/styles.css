@@ -1,7 +1,13 @@
-h1{
+h1 {
   font-family: 'Amatic SC', cursive;
   font-size: 100px;
   padding: 20px;
+  text-align: center;
+}
+h4 {
+  padding-top: 6px;
+  font-size: 40px;
+  font-family: 'Amatic SC', cursive;
   text-align: center;
 }
 .popover {
@@ -48,8 +54,8 @@ article {
 
 svg {
   margin: 0 auto 20px auto;
-  min-width: 700px;
-  min-height: 500px;
+  min-width: 500px;
+  min-height: auto;
 }
 
 footer {
