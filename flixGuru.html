@@ -8,9 +8,14 @@
 
 <body>
   {{>hello}}
+  {{>footer}}
 </body>
 
 <template name="hello">
   <h1 class="logo">flixGURU</h1>
   <!-- <div class="logoCaption">A graphical guide to what is popular at the box office!</div> -->
+</template>
+
+<template name="footer">
+ <footer>This is not a <a href="http://www.rottentomatoes.com">Rotten Tomatoes</a> website. It only scrapes the top 30 movies at the box office in the past week according to Rotten Tomatoes and displays them in an intersting way. This project uses the <a href="https://github.com/ricardmo/vishna">Vishna project</a> as it's d3 model.</footer>
 </template>
