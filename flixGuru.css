@@ -2,5 +2,9 @@
 .logo {
 /*	font-family: 'Kaushan Script', cursive;*/
   padding: 10px;
-  text-shadow: 1px 1px 1px orange;
+  text-shadow: 1.75px 1.75px 1.75px #5EC4CD;
+}
+
+.logoCaption {
+  padding: 10px;
 }
