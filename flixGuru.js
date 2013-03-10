@@ -1,7 +1,6 @@
 Results = new Meteor.Collection('results');
 
 if (Meteor.isClient) {
-  //Vishna code here
 }
 
 

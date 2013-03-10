@@ -11,7 +11,7 @@ function CustomTooltip( tooltipId, width ) {
     if(width){
         tooltip.css("width", width);
     }
-
+    console.log(tooltip);
     tooltip.on("mouseleave", function(e) { hideTooltip(); });
 
     hideTooltip();

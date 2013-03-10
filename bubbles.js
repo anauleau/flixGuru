@@ -1,4 +1,6 @@
-var bubbles = (function() {
+//the following code was created by modifying the hardwork of ricardmo https://github.com/ricardmo/vishna
+//all the changes that were made can be seen in by git history https://github.com/anauleau/vishna/tree/dev
+Meteor.isClient && Meteor.startup(function() {
 
 //NEED TO EDIT --->>
   var urls = {      //API urls
@@ -35,7 +37,7 @@ var bubbles = (function() {
           .size([ w - m,
                   h - m ]),
       svg = d3         //container
-          .select("body article")
+          .select("body")
           .append("svg")
           .attr("height", h + "px")
           .attr("width", w + "px"),
@@ -43,7 +45,9 @@ var bubbles = (function() {
       tooltip = CustomTooltip( "posts_tooltip", 240 );
 
 //initializes based on urls[category]
+  console.log('called init');
   function init( category ) {
+    console.log('called init');
       if ( urls[ category ] ) {
           load( urls[ category ], function() {
               launch();
@@ -261,12 +265,6 @@ function downlight( data, i, element ) {
 //Register category selectors
 $("a.category").on("click", function(e) { update( $(this).attr("value") ); });
 
-return {
-  categories : ["news", "movies"],
-  init : init,
-  update : update
-};
-
-})();
-
-bubbles.init( window.location.href.split("#")[1] ? window.location.href.split("#")[1] : "news");
+init(window.location.href.split("#")[1] ? window.location.href.split("#")[1] : "news");
+update();
+});
