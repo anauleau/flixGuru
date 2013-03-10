@@ -208,13 +208,13 @@ function legend() {
   linearGradient
     .append("stop")
     .attr("offset", "0%")
-    .attr("stop-color", "#ff7f0c")
+    .attr("stop-color", "#024C68")
     .attr("stop-opacity", "0.1");
 
   linearGradient
     .append("stop")
     .attr("offset", "100%")
-    .attr("stop-color", "#ff7f0c")
+    .attr("stop-color", "#024C68")
     .attr("stop-opacity", "1");
 
   var legend = svg.append("g")
@@ -245,11 +245,13 @@ function legend() {
 
 //appends url for hover state
 function highlight( data, i, element ) {
-  console.log(data);
   d3.select( element ).attr( "stroke", "black" );
   var description = data.critics_consensus,
     content = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
-               description + "<br/>";
+               description + "<br/>" + '<a href="' + data.url + '"><img src="' + data.posters.detailed + '" alt="alt text" style="border:none;" /></a>';
+               console.log(data.posters.detailed);
+
+
 
   tooltip.showTooltip(content, d3.event);
 }
