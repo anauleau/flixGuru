@@ -1,0 +1,14 @@
+/* CSS declarations go here */
+.logo {
+	font-family: 'Kaushan Script', cursive;
+  padding: 10px;
+  text-shadow: 1px 1px 1px orange;
+}
+
+.searchForm, h4 {
+  padding: 10px;
+}
+
+.formS {
+  padding: 10px;
+}
