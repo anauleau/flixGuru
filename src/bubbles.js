@@ -81,7 +81,6 @@ var bubbles = (function() {
           return d;
         });
 
-        // Defining the scales
         r = d3.scale.linear()
           .domain([ d3.min(posts, function(d) { return d.score; }),
                     d3.max(posts, function(d) { return d.score; }) ])
@@ -294,7 +293,7 @@ function downlight( data, i, element ) {
 }
 
 //Register category selectors
-$("a.category").on("click", function(e) { update( $(this).attr("value") ); });
+// $("a.category").on("click", function(e) { update( $(this).attr("value") ); });
 
 return {
   categories : ["boxOfficeCritics"],
