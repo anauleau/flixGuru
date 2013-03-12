@@ -1,3 +1,7 @@
+/**
+ * Modified from https://github.com/ricardmo/vishna
+ */
+
 var bubbles = (function() {
   var urls = {      //API urls
       boxOfficeCritics: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kkd937tfu53qzuesmc68j99k&limit=36&callback=?"
@@ -291,9 +295,6 @@ function downlight( data, i, element ) {
   d3.select(element)
     .attr("stroke-opacity", 0);
 }
-
-//Register category selectors
-// $("a.category").on("click", function(e) { update( $(this).attr("value") ); });
 
 return {
   categories : ["boxOfficeCritics"],
