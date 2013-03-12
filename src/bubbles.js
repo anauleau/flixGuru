@@ -15,13 +15,6 @@ var bubbles = (function() {
       r,            //radius scale
       z,            //color scale
       g,            //gravity scale
-      t = {         //time factors
-          minutes : 1,
-          hour    : 60,
-          hours   : 60,
-          day     : 1440,
-          days    : 1440
-      },
       gravity  = -0.0,//gravity constants
       damper   = 0.2,
       friction = 0.9,
@@ -49,8 +42,6 @@ var bubbles = (function() {
       }
   }
 
-//d is equal to the object that is returned by the ajax request
-//url is urls.new
   function load( url, callback ){
       $.getJSON(url, function( data ) {
         posts = data.movies;
@@ -119,7 +110,6 @@ var moveText = function(d){
 };
 
 function launch() {
-
   force
     .nodes( posts );
 
@@ -150,7 +140,6 @@ function launch() {
     .attr("stroke", "#003C30")
     .attr("stroke-opacity", 0)
     .attr("stroke-width", 3)
-    // .attr("stroke", function(d) { return d3.rgb(z( d.comments )).darker(); })
     .attr("id", function(d) { return "post_#" + d.item_id; })
     .attr("title", function(d) { return d.title; })
     .attr("fill-opacity", function(d) { return o( d.time ); })
@@ -202,6 +191,8 @@ function launch() {
     }
   }
 
+
+//Legend code
 function legendSize() {
   var circleRotten = svg.selectAll('.legend')
     .data([3,2,1.5])
@@ -279,7 +270,6 @@ function legend() {
     .attr("x", 45)
     .attr("y", 260)
     .text("Oldest");
-
 }
 
 
@@ -291,7 +281,7 @@ function highlight( data, i, element ) {
   var description = data.comments,
       scoreAud    = data.ratings.audience_score,
       scoreCritic = data.ratings.critics_score,
-          content = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
+      content     = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
                description + "<br/>" + '<span><b>Critical Score:</b> ' + scoreCritic + '</span>' +
                '<br><span><b>Audience Score:</b> ' + scoreAud + '</span>' +
                '<a href="' + data.url + '"><img src="' + data.posters.detailed + '" alt="alt text" style="border:none;" /></a>';
@@ -307,7 +297,7 @@ function downlight( data, i, element ) {
 $("a.category").on("click", function(e) { update( $(this).attr("value") ); });
 
 return {
-  categories : ["boxOfficeCritics", "movies"],
+  categories : ["boxOfficeCritics"],
   init : init
 };
 
