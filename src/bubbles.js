@@ -1,5 +1,4 @@
 var bubbles = (function() {
-//NEED TO EDIT --->>
   var urls = {      //API urls
       boxOfficeCritics: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kkd937tfu53qzuesmc68j99k&limit=36&callback=?"
   },
@@ -49,24 +48,7 @@ var bubbles = (function() {
           });
       }
   }
-//<<----
 
-//updates based on urls[category]
-  function update( category ) {
-    if ( urls[ category ] ) {
-      load( urls[ category ], function() {
-        circles
-          .transition()
-          .duration( 750 )
-          .attr("r", function(d) { return r(d) + 100; })
-          .delay( 250 )
-          .style("opacity", function(d) { return 0; })
-          .remove();
-
-        launch();
-        });
-      }
-  }
 //d is equal to the object that is returned by the ajax request
 //url is urls.new
   function load( url, callback ){
@@ -326,8 +308,7 @@ $("a.category").on("click", function(e) { update( $(this).attr("value") ); });
 
 return {
   categories : ["boxOfficeCritics", "movies"],
-  init : init,
-  update : update
+  init : init
 };
 
 })();
