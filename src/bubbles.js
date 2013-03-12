@@ -1,5 +1,4 @@
 var bubbles = (function() {
-
 //NEED TO EDIT --->>
   var urls = {      //API urls
       boxOfficeCritics: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kkd937tfu53qzuesmc68j99k&limit=36&callback=?"
@@ -44,8 +43,9 @@ var bubbles = (function() {
   function init( category ) {
       if ( urls[ category ] ) {
           load( urls[ category ], function() {
-              launch();
+              // legendSize();
               legend();
+              launch();
           });
       }
   }
@@ -91,27 +91,20 @@ var bubbles = (function() {
           } else {
             d.comments = comments;
           }
-          d.score = score;
-          d.time = format.parse(time);
-          d.url = d.links.alternate;
-          d.color = '#024C68';
-          // switch (mpaaRating){
-          //   case 'R':
-          //     d.color = '#055959';
-          //     break;
-          //   case 'PG-13':
-          //     d.color = '#130C68';
-          //     break;
-          //   case 'PG':
-          //     d.color = '#957408';
-          //     break;
-          //   case 'G':
-          //     d.color = '#954808';
-          //     break;
-          //   default:
-          //     d.color = '#430763';
-          //     break;
-          // }
+
+          d.score   = score;
+          d.time    = format.parse(time);
+          d.url     = d.links.alternate;
+          d.color = '#055959';
+
+          d.timeDif = Date.parse(Date())- Date.parse(d.time);
+          console.log(d.timeDif);
+
+          //release date handler
+          if(400000000 > d.timeDif ) d.time = .6;
+          else if(d.timeDif < 1508187000) d.time = .4;
+          else if(d.timeDif < 3322587000) d.time = .2;
+          else d.time = .05;
           return d;
         });
 
@@ -119,7 +112,7 @@ var bubbles = (function() {
         r = d3.scale.linear()
           .domain([ d3.min(posts, function(d) { return d.score; }),
                     d3.max(posts, function(d) { return d.score; }) ])
-          .range([ 10, 70 ])
+          .range([ 30, 80 ])
           .clamp(true);
 
         z = d3.scale.linear()
@@ -164,6 +157,7 @@ function launch() {
     .enter()
     .append("a")
     .append("circle").call(force.drag)
+    .attr('class', 'movies')
     .on('mousedown.foo', function(d){d.click = true;})
     .on('mouseup.foo', function(d){d.click = false;})
     .on('mousemove.foo', function(d){if(d.click)moveText(d);})
@@ -171,27 +165,31 @@ function launch() {
     .attr("cx", function(d) { return d.x; })
     .attr("cy", function(d) { return d.y; })
     .attr("fill", function(d) { return z( d.comments ); })
-    // .attr("stroke-width", 2)
-    .attr("stroke", function(d) { return d3.rgb(z( d.comments )).darker(); })
+    .attr("stroke", "#003C30")
+    .attr("stroke-opacity", 0)
+    .attr("stroke-width", 3)
+    // .attr("stroke", function(d) { return d3.rgb(z( d.comments )).darker(); })
     .attr("id", function(d) { return "post_#" + d.item_id; })
     .attr("title", function(d) { return d.title; })
-    .style("opacity", function(d) { return o( d.time ); })
+    .attr("fill-opacity", function(d) { return o( d.time ); })
     .attr("fill", function(d){return d.color;})
     .on("mouseover", function(d, i) { highlight( d, i, this ); })
     .on("mouseout", function(d, i) { downlight( d, i, this ); });
 
-  d3.selectAll("circle")
+  d3.selectAll(".movies")
     .transition()
     .ease('bounce')
     .delay(function(d, i) { return i * 50; })
     .duration( 1000 )
-    .attr("r", function(d) { return r( d.score ); })
+    .attr("r", function(d) { return d.r = r( d.score ); })
     .each('end', function(d, i){
-    d.text = svg.append("text").attr("x", d.x)
-                        .attr("y", d.y)
-                        .text(d.rank)
-                        .attr("font-size", "36px")
-                        .attr("font-family", '"Amatic SC", cursive')
+    d.text = svg.append("text")
+                .attr("x", d.x + (.2 * d.r))
+                .attr("y", d.y - (.2 * d.r))
+                .text(d.rank)
+                .attr("font-size", "34px")
+                .attr("font-family", '"Amatic SC", cursive')
+                .attr("text-align", "left")
     });
 
   loadGravity( moveCenter );
@@ -206,8 +204,8 @@ function launch() {
           generator(e.alpha);
           d = node
 
-            .attr("cx", function(d) { return d.x;})
-            .attr("cy", function(d) { return d.y; })
+            .attr("cx", function(d) { return d.x + (.2 * d.r);})
+            .attr("cy", function(d) { return d.y - (.2 * d.r); })
             .data()
             d.forEach(moveText);
         }).start();
@@ -221,6 +219,38 @@ function launch() {
       });
     }
   }
+
+function legendSize() {
+  var circleRotten = svg.selectAll('.legend')
+    .data([3,2,1.5])
+    .enter()
+    .append('circle');
+
+    circleRotten
+    .attr('class', 'legend')
+    .attr('fill', '#055959')
+    .attr('opacity', .8)
+    .attr('r', function(data){ return data * 11;})
+    .attr('cx', 40)
+    .attr('cy', function(d, i){
+      var previous = circleRotten.nth(i - 1);
+      return previous ? previous.attr('r'): 0 + d * 11 + 350 + (i * 60);
+    });
+
+  var legendSize = svg.append("g")
+
+  legendSize
+    .append("text")
+    .attr("x", 20)
+    .attr("y", 300)
+    .text("Higher Critical Score");
+
+  legendSize
+    .append("text")
+    .attr("x", 20)
+    .attr("y", 500)
+    .text("Lower Critical Score");
+}
 
 function legend() {
 
@@ -236,13 +266,13 @@ function legend() {
   linearGradient
     .append("stop")
     .attr("offset", "0%")
-    .attr("stop-color", "#024C68")
+    .attr("stop-color", "#055959")
     .attr("stop-opacity", "0.1");
 
   linearGradient
     .append("stop")
     .attr("offset", "100%")
-    .attr("stop-color", "#024C68")
+    .attr("stop-color", "#055959")
     .attr("stop-opacity", "1");
 
   var legend = svg.append("g")
@@ -251,7 +281,7 @@ function legend() {
   legend
     .append("rect")
     .attr("x", "20")
-    .attr("y", "20")
+    .attr("y", "60")
     .attr("width", "20")
     .attr("height", "200")
     .attr("style", "fill:url(#legendGradient);");
@@ -259,13 +289,13 @@ function legend() {
   legend
     .append("text")
     .attr("x", 45)
-    .attr("y", 30)
+    .attr("y", 70)
     .text("Newest");
 
   legend
     .append("text")
     .attr("x", 45)
-    .attr("y", 220)
+    .attr("y", 260)
     .text("Oldest");
 
 }
@@ -273,7 +303,8 @@ function legend() {
 
 //appends url for hover state
 function highlight( data, i, element ) {
-  d3.select( element ).attr( "stroke", "black" );
+  d3.select( element )
+    .attr('stroke-opacity', 1);
   // d3.select(".thumb").attr("src", data.posters.detailed);
   var description = data.comments,
       scoreAud    = data.ratings.audience_score,
@@ -286,7 +317,8 @@ function highlight( data, i, element ) {
 }
 
 function downlight( data, i, element ) {
-  d3.select(element).attr("stroke", function(d) { return d3.rgb( z( d.comments )).darker(); });
+  d3.select(element)
+    .attr("stroke-opacity", 0);
 }
 
 //Register category selectors
