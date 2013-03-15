@@ -68,10 +68,6 @@ a > circle {
 /*  fill: #024C68;*/
 }
 
-/*a:hover > circle {
-  stroke: #000;
-}*/
-
 .thumb {
   position: absolute;
   top: 375px;

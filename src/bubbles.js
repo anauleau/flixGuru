@@ -13,13 +13,13 @@ var bubbles = (function() {
           x : ( w - m ) / 2,
           y : ( h - m ) / 2
       },
-      posts,        //content
-      next,         //next page
-      o,            //opacity scale
-      r,            //radius scale
-      z,            //color scale
-      g,            //gravity scale
-      gravity  = -0.0,//gravity constants
+      posts,                //content
+      next,                 //next page
+      o,                    //opacity scale
+      r,                    //radius scale
+      z,                    //color scale
+      g,                    //gravity scale
+      gravity  = -0.0,      //gravity constants
       damper   = 0.2,
       friction = 0.9,
       force = d3       //gravity engine
@@ -88,7 +88,7 @@ var bubbles = (function() {
         r = d3.scale.linear()
           .domain([ d3.min(posts, function(d) { return d.score; }),
                     d3.max(posts, function(d) { return d.score; }) ])
-          .range([ 30, 80 ])
+          .range([ 28, 75 ])
           .clamp(true);
 
         z = d3.scale.linear()
@@ -284,9 +284,10 @@ function highlight( data, i, element ) {
   var description = data.comments,
       scoreAud    = data.ratings.audience_score,
       scoreCritic = data.ratings.critics_score,
+      getTimesURL = 'http://www.rottentomatoes.com/m/' + data.id + '/movie_times/',
       content     = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
                description + "<br/>" + '<span><b>Critical Score:</b> ' + scoreCritic + '</span>' +
-               '<br><span><b>Audience Score:</b> ' + scoreAud + '</span>' +
+               '<br><span><b>Audience Score:</b> ' + scoreAud + '</span><br/>' + '<span class=\"title\"><a href=\"' + getTimesURL + '\">GET SHOWTIMES</a></span><br/>' +
                '<a href="' + data.url + '"><img src="' + data.posters.detailed + '" alt="alt text" style="border:none;" /></a>';
   tooltip.showTooltip(content, d3.event);
 }
