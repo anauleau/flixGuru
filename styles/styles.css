@@ -78,3 +78,8 @@ a > circle {
 .fandango {
   text-align: center;
 }
+
+.caption {
+  width:auto;
+  text-align: center;
+}

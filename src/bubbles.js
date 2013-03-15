@@ -42,6 +42,7 @@ var bubbles = (function() {
               // legendSize();
               legend();
               launch();
+              // sizeCaption();
           });
       }
   }
@@ -75,7 +76,6 @@ var bubbles = (function() {
           d.color = '#055959';
 
           d.timeDif = Date.parse(Date())- Date.parse(d.time);
-          console.log(d.timeDif);
 
           //release date handler
           if(400000000 > d.timeDif ) d.time = .6;
@@ -194,38 +194,38 @@ function launch() {
     }
   }
 
+function sizeCaption(){
+    var caption = "<div class='caption'><h4>Bubble Size</h4><br>"
+                    + "<div>The size of each movies bubbles is determined by the aggregate critical"
+                    + "score calculated by <a href='www.rottentomatoes.com'>Rotten Tomatoes</a>."
+                    + "The scores range from 0-100 (0 being an awful movie and 100 being great."
+                    + "FlixGURU takes this score and scales the bubbles accordingly therefore the"
+                    + "larger a bubble reperesent more critically acclaimed movies.</div>"
+                  + "</div>";
+    $('article').append(caption);
+}
 
 //Legend code
 function legendSize() {
-  var circleRotten = svg.selectAll('.legend')
-    .data([3,2,1.5])
-    .enter()
-    .append('circle');
+  var caption = "The size of each movies bubbles is determined by the aggregate criticalscore calculated by Rotten Tomatoes.The scores range from 0-100 (0 being an awful movie and 100 being great.FlixGURU takes this score and scales the bubbles accordingly therefore thelarger a bubble reperesent more critically acclaimed movies.";
+  var rect =  svg.append('rect').transition().duration(500).attr('width', 150)
+                .attr('height', 100)
+                .attr('x', 20)
+                .attr('y', 300)
+                .style('fill', 'white')
+                .attr('stroke', 'black');
+              svg.append("caption")
+                .text(caption)
+                .attr("text-align", "left");
 
-    circleRotten
-    .attr('class', 'legend')
-    .attr('fill', '#055959')
-    .attr('opacity', .8)
-    .attr('r', function(data){ return data * 11;})
-    .attr('cx', 40)
-    .attr('cy', function(d, i){
-      var previous = circleRotten.nth(i - 1);
-      return previous ? previous.attr('r'): 0 + d * 11 + 350 + (i * 60);
-    });
+  // var legendSize = svg.append("rect")
 
-  var legendSize = svg.append("g")
+  // legendSize
+  //   .append("text")
+  //   .attr("x", 20)
+  //   .attr("y", 300)
+  //   .attr('width', '100')
 
-  legendSize
-    .append("text")
-    .attr("x", 20)
-    .attr("y", 300)
-    .text("Higher Critical Score");
-
-  legendSize
-    .append("text")
-    .attr("x", 20)
-    .attr("y", 500)
-    .text("Lower Critical Score");
 }
 
 function legend() {
