@@ -80,6 +80,13 @@ a > circle {
 }
 
 .caption {
-  width:auto;
+  position: absolute;
+  width:200px;
   text-align: center;
+  left: 100px;
+  top: 500px;
+}
+
+.source {
+  font-size: 50px;
 }

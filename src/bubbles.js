@@ -206,27 +206,6 @@ function sizeCaption(){
 }
 
 //Legend code
-function legendSize() {
-  var caption = "The size of each movies bubbles is determined by the aggregate criticalscore calculated by Rotten Tomatoes.The scores range from 0-100 (0 being an awful movie and 100 being great.FlixGURU takes this score and scales the bubbles accordingly therefore thelarger a bubble reperesent more critically acclaimed movies.";
-  var rect =  svg.append('rect').transition().duration(500).attr('width', 150)
-                .attr('height', 100)
-                .attr('x', 20)
-                .attr('y', 300)
-                .style('fill', 'white')
-                .attr('stroke', 'black');
-              svg.append("caption")
-                .text(caption)
-                .attr("text-align", "left");
-
-  // var legendSize = svg.append("rect")
-
-  // legendSize
-  //   .append("text")
-  //   .attr("x", 20)
-  //   .attr("y", 300)
-  //   .attr('width', '100')
-
-}
 
 function legend() {
 
