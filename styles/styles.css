@@ -1,0 +1,92 @@
+h1 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 100px;
+  padding: 20px;
+  text-align: center;
+}
+h4 {
+  padding-top: 6px;
+  font-size: 40px;
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+}
+.popover {
+  z-index: 9000;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  border: 1px solid #e0e0e0;
+  background-color: #fefefe;
+  opacity: .9;
+  color: black;
+  padding: 10px;
+  width: 100px;
+  font-size: 12pt;
+  z-index: 10;
+}
+
+.tooltip .title a {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+/*  color: #024C68;*/
+}
+
+a:visited {
+  color: #08c;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+article {
+  margin: auto auto auto auto;
+  text-align: center;
+}
+
+svg {
+  margin: 0 auto 20px auto;
+  min-width: 500px;
+  min-height: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+}
+
+a > circle {
+/*  fill: #024C68;*/
+}
+
+.thumb {
+  position: absolute;
+  top: 375px;
+  left: 100px;
+  opacity: .8;
+}
+
+.fandango {
+  text-align: center;
+}
+
+.caption {
+  position: absolute;
+  width:200px;
+  text-align: center;
+  left: 100px;
+  top: 500px;
+}
+
+.source {
+  font-size: 50px;
+}
