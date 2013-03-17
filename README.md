@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <head>
 <link href='http://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
 <style type="text/css">
@@ -8,6 +8,7 @@ h1 {
 }
 </style>
 </head>
+<body>
 <h1>flixGURU</h1>
 =========
 <p>flixGURU is a d3 project that graphs the top 35 movies at the box office based on their aggregate critical score.</p>
@@ -35,3 +36,4 @@ d.score refers to the aggregate critical score of each movie. I begin the range 
             .attr("font-family", '"Amatic SC", cursive')
             .attr("text-align", "left")
 });</pre>
+</body>
