@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<head>
-<link href='http://fonts.googleapis.com/css?family=Amatic+SC:700' rel='stylesheet' type='text/css'>
-<style type="text/css">
-h1 {
-  font-family: 'Amatic SC', cursive;
-  text-align: center;
-}
-</style>
-</head>
 <body>
 <h1>flixGURU</h1>
 =========
