@@ -50,18 +50,24 @@ var bubbles = (function() {
   function load( url, callback ){
       $.getJSON(url, function( data ) {
         posts = data.movies;
-        next = posts.pop();
 
         var rank = 0;
-        posts.map( function(d) {
+        posts.map(function(d) {
           var comments    = d.critics_consensus,
               score       = parseInt( d.ratings.critics_score ),
-              time        = d.release_dates.theater.split(" ").toString(),
+              time        = d.release_dates.theater,
               format      = d3.time.format("%Y-%m-%d")
               scoreCritic = d.ratings.critics_score,
               mpaaRating  = d.mpaa_rating,
               scoreAud    = d.ratings.audience_score;
               rank ++;
+
+            if(time){
+              time = time.split(" ").toString();
+            } else {
+              time = 'Not Specified';
+              console.log(d);
+            }
 
           d.rank = rank;
           if (comments === undefined){
