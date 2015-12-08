@@ -1,6 +1,5 @@
 <body>
 <h1>flixGURU</h1>
-<a href="www.flixguru.com">www.flixguru.com</a>
 =========
 <p>flixGURU is a d3 project that graphs the top 35 movies at the box office based on their aggregate critical score.</p>
 <ul>
