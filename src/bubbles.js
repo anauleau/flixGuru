@@ -53,7 +53,7 @@ var bubbles = (function() {
 
         var rank = 0;
         posts.map(function(d) {
-          var comments    = d.critics_consensus,
+          var comments    = d.synopsis,
               score       = parseInt( d.ratings.critics_score ),
               time        = d.release_dates.theater,
               format      = d3.time.format("%Y-%m-%d")
@@ -70,8 +70,8 @@ var bubbles = (function() {
             }
 
           d.rank = rank;
-          if (comments === undefined){
-            d.comments = '<i>No critical consensus available.<i>';
+          if (!comments){
+            d.comments = '<i>No synopsis available.<i>';
           } else {
             d.comments = comments;
           }
@@ -265,15 +265,14 @@ function legend() {
 function highlight( data, i, element ) {
   d3.select( element )
     .attr('stroke-opacity', 1);
-  // d3.select(".thumb").attr("src", data.posters.detailed);
   var description = data.comments,
       scoreAud    = data.ratings.audience_score,
       scoreCritic = data.ratings.critics_score,
       getTimesURL = 'http://www.rottentomatoes.com/m/' + data.id + '/movie_times/',
       content     = '<span class=\"title\"><a href=\"' + data.url + '\">' + data.title + '</a></span><br/>' +
-               description + "<br/>" + '<span><b>Critical Score:</b> ' + scoreCritic + '</span>' +
-               '<br><span><b>Audience Score:</b> ' + scoreAud + '</span><br/>' + '<span class=\"title\"><a href=\"' + getTimesURL + '\">GET SHOWTIMES</a></span><br/>' +
-               '<a href="' + data.url + '"><img src="' + data.posters.detailed + '" alt="alt text" style="border:none;" /></a>';
+               '<a href="' + data.url + '"><img src="' + data.posters.profile + '" alt="alt text" style="border:none; zoom: 200%;" /></a><br/>' + 
+               '<span><b>Critical Score:</b> ' + scoreCritic + '</span>' + '<br><span><b>Audience Score:</b> ' +
+               scoreAud + '</span><br/>' + '<span class=\"title\"><a href=\"' + getTimesURL + '\">GET SHOWTIMES</a></span><br/>';
   tooltip.showTooltip(content, d3.event);
 }
 
