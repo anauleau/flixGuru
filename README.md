@@ -1,7 +1,7 @@
 <body>
 <h1>flixGURU</h1>
 =========
-<p>flixGURU is a d3 project that graphs the top 35 movies at the box office based on their aggregate critical score.</p>
+<p>flixGURU is a d3 project that graphs the top 35 movies at the box office based on their aggregate critical score</p>
 <ul>
 <li>The project uses the Rotten Tomatoes API as its data source for the box office rankings, movie review data, movie poster images, and other movie related information</li>
 <li>The d3 code is based on the <a href="https://github.com/ricardmo/vishna">Vishna project</a>. I adapted and refactored the code from this project to fit this application's needs.</li>
